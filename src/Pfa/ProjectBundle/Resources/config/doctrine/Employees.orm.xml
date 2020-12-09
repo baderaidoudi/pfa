@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Pfa\ProjectBundle\Entity\Employees" table="employees">
+    <indexes>
+      <index name="fk1_emp" columns="department_id"/>
+      <index name="fk2_emp" columns="manager_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="uk1_emp" columns="email"/>
+    </unique-constraints>
+    <id name="employeeId" type="integer" column="employee_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="firstName" type="string" column="first_name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lastName" type="string" column="last_name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="phone" type="string" column="phone" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hiredate" type="date" column="hiredate" nullable="true"/>
+    <field name="job" type="string" column="job" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="salary" type="decimal" column="salary" precision="7" scale="2" nullable="true"/>
+    <field name="username" type="string" column="username" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="password" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="enabled" type="boolean" column="enabled" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="role" type="string" column="role" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="department" target-entity="Departments" fetch="LAZY">
+      <join-columns>
+        <join-column name="department_id" referenced-column-name="department_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="manager" target-entity="Employees" fetch="LAZY">
+      <join-columns>
+        <join-column name="manager_id" referenced-column-name="employee_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

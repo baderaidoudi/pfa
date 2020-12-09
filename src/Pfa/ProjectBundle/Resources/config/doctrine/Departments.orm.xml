@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Pfa\ProjectBundle\Entity\Departments" table="departments">
+    <indexes>
+      <index name="fk1_dept" columns="location_id"/>
+    </indexes>
+    <id name="departmentId" type="integer" column="department_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="departmentName" type="string" column="department_name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="location" target-entity="Locations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="location_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

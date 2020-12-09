@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Pfa\ProjectBundle\Entity\Assignments" table="assignments">
+    <indexes>
+      <index name="fk1_assign" columns="project_id"/>
+      <index name="IDX_308A50DD8C03F15C" columns="employee_id"/>
+    </indexes>
+    <id name="commitDate" type="datetime" column="commit_date"/>
+    <id name="project" association-key="true"/>
+    <id name="employee" association-key="true"/>
+    <field name="commitEmpDesc" type="string" column="commit_emp_desc" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="commitMgrDesc" type="string" column="commit_mgr_desc" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <one-to-one field="project" target-entity="Projects" fetch="LAZY">
+      <join-columns>
+        <join-column name="project_id" referenced-column-name="project_id"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="employee" target-entity="Employees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id" referenced-column-name="employee_id"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>
