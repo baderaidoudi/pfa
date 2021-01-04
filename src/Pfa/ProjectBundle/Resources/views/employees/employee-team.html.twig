@@ -16,7 +16,7 @@
 <br><br><br><br><br>
 
 <div class='container container-fluid'>
-    {% if team is empty %}
+    {% if team is null %}
     <h2>No Records yet!</h2>
     {% endif %}
             <h2 th:text = '${size}' ></h2>  <br>
@@ -27,7 +27,7 @@
                     <th>LastName</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>HireDate</th>
+
                     <th>Job</th>
                     <th>Department</th>
                     <th>Location</th>
@@ -35,11 +35,11 @@
                 </thead>
                 <tbody>
                 {% for e in team %}
-                <tr >
+                <tr>
                     <td>{{ e.firstName }}</td>
                     <td>{{ e.lastName }}</td>
                     <td>{{ e.email }}</td>
-                    <td>{{ e.hiredate }}</td>
+                 <td>{{ e.phone }}</td>
                     <td>{{ e.job }}</td>
                     <td>{{ e.department.departmentName }}</td>
                     <td>{{ e.department.location.adr}} , {{  e.department.location.postalCode}} , {{ e.department.location.city }} </td>

@@ -4,6 +4,7 @@ namespace Pfa\ProjectBundle\Controller;
 
 use Pfa\ProjectBundle\Entity\Assignments;
 use Pfa\ProjectBundle\Entity\Employees;
+use Pfa\ProjectBundle\Entity\Locations;
 use Pfa\ProjectBundle\Entity\Projects;
 use Pfa\ProjectBundle\Repository\EmployeeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,23 +23,22 @@ class EmployeeController extends Controller
         $employeeuc = $repositoryemp->findOneBy(
             ['employeeId' => $id ]
         );
-
-     $names = $employeeuc->getFirstName()." ".$employeeuc->getLastName();
+        $manid= $employeeuc->getManager()->getEmployeeId();
+        $names = $employeeuc->getFirstName()." ".$employeeuc->getLastName();
         $repository = $this->getDoctrine()->getRepository(Projects::class);
         $employeeProjectData = $repository->findBy(
             ['projectId' => '1']
         );
-
-
-
-
-        return $this->render('@PfaProject/employees/employee-index.html.twig', ['names' => $names , 'employeeProjectData' => $employeeProjectData]);
+        return $this->render('@PfaProject/employees/employee-index.html.twig', ['names' => $names , 'employeeProjectData' => $employeeProjectData, 'manid'=>$manid]);
     }
 
-    public function teamAction()
+    public function teamAction($manid)
     {
-
-        return $this->render('@PfaProject/employees/employee-team.html.twig',array('team' => "null"));
+        $repositoryteam = $this->getDoctrine()->getRepository(Employees::class);
+        $team = $repositoryteam->findBy(
+            ['manager' => $manid ]
+        );
+        return $this->render('@PfaProject/employees/employee-team.html.twig',array('team' => $team));
     }
 
     public function logoutAction($name)

@@ -12,12 +12,22 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pfa\ProjectBundle\Entity\UserCredentials;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+/*
+$session = new Session();
+$session->start();
+*/
 
 class DefaultController extends Controller
 {
 
+
+
+
     public function loginAction(Request $request)
-    {
+    {/*
         $employeeProjectData = $this->getDoctrine()
             ->getRepository(Projects::class)
             ->find("1");
@@ -49,11 +59,13 @@ class DefaultController extends Controller
                 ->setParameter('username', $username)
                 ->setParameter('password', $password);
              $UserCredentials=$query->getResult();
-*/             if($users){
+*/
+
+                if($users){
 
                 return $this->redirectToRoute(
                     'employee-index',
-                    ['id'=> $users->getUserId() ]
+                    ['id'=> $users->getEmployee()->getEmployeeId() ]
                 );
             }
             else{

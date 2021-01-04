@@ -10,9 +10,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
+
                         <!--<li class="nav-item active"><a class="nav-link" th:href="@{/app/employees/employee-index}">Home<span class="sr-only">(current)</span></a></li> -->
                         <li class="nav-item"><a class="nav-link"  href="{{ path('info') }}">Account info</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('team' ) }}" >My Team members</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('team' , {'manid': 9 }) }}" >My Team members</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ path('employee-indexed') }}" >Assigned projects & Commits</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ path('employee-indexed') }}">About</a></li>
                     </ul>

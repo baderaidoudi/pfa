@@ -16,7 +16,7 @@ info:
 
 
 team:
-    path:     /employees/employee-team
+    path:     /employees/employee-team{manid}
     defaults: { _controller: PfaProjectBundle:Employee:team }
 
 
