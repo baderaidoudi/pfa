@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html >
+
+<head>
+    <meta charset="UTF-8">
+    <title>employee index</title>
+
+        {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/employeeNavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <div align='center' >
+        <div class="alert alert-dismissible alert-success col-sm-8 ">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+            <h4>Welcome   <strong>{{ names }}</strong>, <em>you're successfully logged in !</em></h4>
+
+        </div>
+    </div>
+
+    <!-- 		<div class="alert alert-dismissible alert-success col-sm-3"> -->
+    <!-- 			<div class='container'>Welcome&nbsp;<h5 th:text="${fnameAndLname}"></h5></div> -->
+    <!-- 		</div> -->
+
+    <br><br>
+
+    {% if employeeProjectData is empty %}
+    <h2>No Records yet!</h2>
+   {% else %}
+            <h2 th:text = '${size}' ></h2>  <br>
+            <table class="table table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>Project title</th>
+                    <th>Start_Date</th>
+                    <th>End_Date</th>
+                    <th>Project status</th>
+                    <th class='text-info'><i>=>SHOW</i></th>
+                    <th class='text-info'><i>=>SHOW</i></th>
+                    <th class='text-info'><i>=>ADD</i></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for e in employeeProjectData %}
+                    <tr>
+                    <td>{{ e.title }}</td>
+                    <td>{{ e.startDate|date('Y-m-d')  }}</td>
+                    <td>{{ e.endDate| date('Y-m-d')  }}</td>
+                    <td>{{ e.status }}</td>
+                    <td><a class='btn btn btn-outline-info' href="{{ path('employee-show-my-commits', {'projectId': e.projectId}) }}">My commits</a></td>
+                    <td><a class='btn btn btn-outline-info' href="{{ path('employee-show-all-commits', {'projectId': e.projectId}) }}" >All commits</a></td>
+                    <td><a class='btn btn btn-outline-info' href="{{ path('employee-add-commit', {'projectId': e.projectId}) }}">New commit?</a></td>
+                   </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    {% endif %}
+        </div>
+        <!--<h4><a th:href="@{/app/employees/employee-all-commits}">Show All Projects commits</a></h4> -->
+    </div>
+
+    <!--
+    <div class="col-md-4">
+        <canvas id="myPieChart" height="50" width="50"></canvas>
+
+        <script>
+            var chartData = "[[${projectStatusCnt}]]"
+        </script>
+
+    </div>
+    -->
+
+</div>
+
+<br><br><br><br><br>
+
+{%  embed "@PfaProject/layout/js.html.twig" %}
+{% endembed %}
+</body>
+</html>

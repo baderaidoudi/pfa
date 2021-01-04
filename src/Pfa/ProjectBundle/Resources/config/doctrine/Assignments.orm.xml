@@ -11,11 +11,13 @@
     <field name="commitEmpDesc" type="string" column="commit_emp_desc" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
     <field name="commitMgrDesc" type="string" column="commit_mgr_desc" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
     <one-to-one field="project" target-entity="Projects" fetch="LAZY">

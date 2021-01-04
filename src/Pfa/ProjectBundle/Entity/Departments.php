@@ -17,7 +17,7 @@ class Departments
      *
      * @ORM\Column(name="department_name", type="string", length=255, nullable=true)
      */
-    private $departmentName;
+    private $departmentName = 'NULL';
 
     /**
      * @var integer
@@ -37,6 +37,54 @@ class Departments
      * })
      */
     private $location;
+
+    /**
+     * @return string
+     */
+    public function getDepartmentName()
+    {
+        return $this->departmentName;
+    }
+
+    /**
+     * @param string $departmentName
+     */
+    public function setDepartmentName($departmentName)
+    {
+        $this->departmentName = $departmentName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepartmentId()
+    {
+        return $this->departmentId;
+    }
+
+    /**
+     * @param int $departmentId
+     */
+    public function setDepartmentId($departmentId)
+    {
+        $this->departmentId = $departmentId;
+    }
+
+    /**
+     * @return Locations
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Locations $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
 
 
 }

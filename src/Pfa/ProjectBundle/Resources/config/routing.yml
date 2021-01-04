@@ -1,3 +1,55 @@
-pfa_project_homepage:
+homepage:
     path:     /
+    defaults: { _controller: PfaProjectBundle:Default:homepage }
+
+homepageauth:
+    path:     /login
+    defaults: { _controller: PfaProjectBundle:Default:login }
+
+loginindex:
+    path:     /index
     defaults: { _controller: PfaProjectBundle:Default:index }
+
+info:
+    path:     /employees/employee-info
+    defaults: { _controller: PfaProjectBundle:Employee:info }
+
+
+team:
+    path:     /employees/employee-team
+    defaults: { _controller: PfaProjectBundle:Employee:team }
+
+
+employee-show-my-commits:
+    path:     /employees/employee-show-my-commits/{projectId}
+    defaults: { _controller: PfaProjectBundle:Employee:index }
+
+employee-show-all-commits:
+    path:     /employees/employee-show-all-commits/{projectId}
+    defaults: { _controller: PfaProjectBundle:Employee:index }
+
+employee-add-commit:
+    path:     /employees/employee-add-commit/{projectId}
+    defaults: { _controller: PfaProjectBundle:Employee:index }
+
+
+employee-index:
+    path:     /employees/employee-index{id}
+    defaults: { _controller: PfaProjectBundle:Employee:index }
+
+manager-index:
+    path:     /employees/manager-index
+    defaults: { _controller: PfaProjectBundle:Manager:index }
+
+logout:
+    path:     /logout
+    defaults: { _controller: PfaProjectBundle:Employee:logout }
+
+
+mindex:
+    path:     /managers/manager-index
+    defaults: { _controller: PfaProjectBundle:Manager:index }
+
+employee-indexed:
+    path:     /employees/employee-index
+    defaults: { _controller: PfaProjectBundle:Employee:indexed }

@@ -17,14 +17,14 @@ class Assignments
      *
      * @ORM\Column(name="commit_emp_desc", type="string", length=255, nullable=true)
      */
-    private $commitEmpDesc;
+    private $commitEmpDesc = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="commit_mgr_desc", type="string", length=255, nullable=true)
      */
-    private $commitMgrDesc;
+    private $commitMgrDesc = 'NULL';
 
     /**
      * @var \DateTime
@@ -58,6 +58,86 @@ class Assignments
      * })
      */
     private $employee;
+
+    /**
+     * @return string
+     */
+    public function getCommitEmpDesc()
+    {
+        return $this->commitEmpDesc;
+    }
+
+    /**
+     * @param string $commitEmpDesc
+     */
+    public function setCommitEmpDesc($commitEmpDesc)
+    {
+        $this->commitEmpDesc = $commitEmpDesc;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommitMgrDesc()
+    {
+        return $this->commitMgrDesc;
+    }
+
+    /**
+     * @param string $commitMgrDesc
+     */
+    public function setCommitMgrDesc($commitMgrDesc)
+    {
+        $this->commitMgrDesc = $commitMgrDesc;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCommitDate()
+    {
+        return $this->commitDate;
+    }
+
+    /**
+     * @param \DateTime $commitDate
+     */
+    public function setCommitDate($commitDate)
+    {
+        $this->commitDate = $commitDate;
+    }
+
+    /**
+     * @return Projects
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Projects $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+    /**
+     * @return Employees
+     */
+    public function getEmployee()
+    {
+        return $this->employee;
+    }
+
+    /**
+     * @param Employees $employee
+     */
+    public function setEmployee($employee)
+    {
+        $this->employee = $employee;
+    }
 
 
 }

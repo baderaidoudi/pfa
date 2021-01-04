@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Employees
  *
- * @ORM\Table(name="employees", uniqueConstraints={@ORM\UniqueConstraint(name="uk1_emp", columns={"email"})}, indexes={@ORM\Index(name="fk1_emp", columns={"department_id"}), @ORM\Index(name="fk2_emp", columns={"manager_id"})})
+ * @ORM\Table(name="employees", indexes={@ORM\Index(name="fk1_emp", columns={"department_id"}), @ORM\Index(name="fk2_emp", columns={"manager_id"})})
  * @ORM\Entity
  */
 class Employees
@@ -17,77 +17,49 @@ class Employees
      *
      * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
-    private $firstName;
+    private $firstName = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
-    private $lastName;
+    private $lastName = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    private $email;
+    private $email = '\'springabcxyzboot@gmail.com\'';
 
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
-    private $phone;
+    private $phone = '\'22125144\'';
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="hiredate", type="date", nullable=true)
      */
-    private $hiredate;
+    private $hiredate = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="job", type="string", length=255, nullable=true)
      */
-    private $job;
+    private $job = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="salary", type="decimal", precision=7, scale=2, nullable=true)
      */
-    private $salary;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=true)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enabled", type="boolean", nullable=true)
-     */
-    private $enabled = '1';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=255, nullable=true)
-     */
-    private $role;
+    private $salary = 'NULL';
 
     /**
      * @var integer
@@ -117,6 +89,166 @@ class Employees
      * })
      */
     private $manager;
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getHiredate()
+    {
+        return $this->hiredate;
+    }
+
+    /**
+     * @param \DateTime $hiredate
+     */
+    public function setHiredate($hiredate)
+    {
+        $this->hiredate = $hiredate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * @param string $job
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalary()
+    {
+        return $this->salary;
+    }
+
+    /**
+     * @param string $salary
+     */
+    public function setSalary($salary)
+    {
+        $this->salary = $salary;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEmployeeId()
+    {
+        return $this->employeeId;
+    }
+
+    /**
+     * @param int $employeeId
+     */
+    public function setEmployeeId($employeeId)
+    {
+        $this->employeeId = $employeeId;
+    }
+
+    /**
+     * @return Departments
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param Departments $department
+     */
+    public function setDepartment($department)
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @return Employees
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param Employees $manager
+     */
+    public function setManager($manager)
+    {
+        $this->manager = $manager;
+    }
 
 
 }

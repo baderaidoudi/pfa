@@ -7,16 +7,19 @@
     <field name="adr" type="string" column="adr" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
     <field name="postalCode" type="string" column="postal_code" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
     <field name="city" type="string" column="city" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
   </entity>

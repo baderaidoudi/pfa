@@ -17,21 +17,21 @@ class Locations
      *
      * @ORM\Column(name="adr", type="string", length=255, nullable=true)
      */
-    private $adr;
+    private $adr = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
      */
-    private $postalCode;
+    private $postalCode = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $city;
+    private $city = 'NULL';
 
     /**
      * @var integer
@@ -41,6 +41,70 @@ class Locations
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $locationId;
+
+    /**
+     * @return string
+     */
+    public function getAdr()
+    {
+        return $this->adr;
+    }
+
+    /**
+     * @param string $adr
+     */
+    public function setAdr($adr)
+    {
+        $this->adr = $adr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param string $postalCode
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationId()
+    {
+        return $this->locationId;
+    }
+
+    /**
+     * @param int $locationId
+     */
+    public function setLocationId($locationId)
+    {
+        $this->locationId = $locationId;
+    }
 
 
 }

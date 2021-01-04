@@ -10,6 +10,7 @@
     <field name="departmentName" type="string" column="department_name" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
     <many-to-one field="location" target-entity="Locations" fetch="LAZY">

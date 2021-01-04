@@ -7,13 +7,23 @@
     <field name="title" type="string" column="title" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
-    <field name="startDate" type="date" column="start_date" nullable="true"/>
-    <field name="endDate" type="date" column="end_date" nullable="true"/>
+    <field name="startDate" type="date" column="start_date" nullable="true">
+      <options>
+        <option name="default">NULL</option>
+      </options>
+    </field>
+    <field name="endDate" type="date" column="end_date" nullable="true">
+      <options>
+        <option name="default">NULL</option>
+      </options>
+    </field>
     <field name="status" type="string" column="status" length="255" nullable="true">
       <options>
         <option name="fixed"/>
+        <option name="default">NULL</option>
       </options>
     </field>
   </entity>
