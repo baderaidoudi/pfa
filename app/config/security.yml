@@ -1,6 +1,9 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    encoders:
+        Pfa\Project\Entity\UserCredentials:  bcrypt
+
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -21,4 +24,4 @@ security:
             #http_basic: ~
 
             # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+
