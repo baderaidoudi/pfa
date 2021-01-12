@@ -26,8 +26,8 @@
                     <th>FirstName</th>
                     <th>LastName</th>
                     <th>Email</th>
-                    <th>Phone</th>
-
+                    <th>Phone N</th>
+                    <th>HireDate</th>
                     <th>Job</th>
                     <th>Department</th>
                     <th>Location</th>
@@ -39,7 +39,8 @@
                     <td>{{ e.firstName }}</td>
                     <td>{{ e.lastName }}</td>
                     <td>{{ e.email }}</td>
-                 <td>{{ e.phone }}</td>
+                     <td>{{ e.phone }}</td>
+                    <td>{{ e.hiredate|date }}</td>
                     <td>{{ e.job }}</td>
                     <td>{{ e.department.departmentName }}</td>
                     <td>{{ e.department.location.adr}} , {{  e.department.location.postalCode}} , {{ e.department.location.city }} </td>

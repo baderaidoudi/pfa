@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UserCredentials
  *
- * @ORM\Table(name="user_credentials")
+ * @ORM\Table(name="user_credentials", uniqueConstraints={@ORM\UniqueConstraint(name="uk1_u", columns={"username"})}, indexes={@ORM\Index(name="fk1_u", columns={"employee_id"})})
  * @ORM\Entity
  */
 class UserCredentials
@@ -17,28 +17,28 @@ class UserCredentials
      *
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
-    private $username;
+    private $username = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
-    private $password;
+    private $password = 'NULL';
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
-    private $enabled;
+    private $enabled = '1';
 
     /**
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=255, nullable=true)
      */
-    private $role;
+    private $role = 'NULL';
 
     /**
      * @var integer
@@ -52,17 +52,12 @@ class UserCredentials
     /**
      * @var \Pfa\ProjectBundle\Entity\Employees
      *
-     * @ORM\OneToOne(targetEntity="Pfa\ProjectBundle\Entity\Employees")
-     * @ORM\JoinColumn(name="employee_id", referencedColumnName="employee_id")
+     * @ORM\ManyToOne(targetEntity="Pfa\ProjectBundle\Entity\Employees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id", referencedColumnName="employee_id")
+     * })
      */
     private $employee;
-
-
-
-
-
-
-
 
     /**
      * @return string

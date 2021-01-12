@@ -53,8 +53,8 @@
                     {% for e in employeeProjectData %}
                     <tr>
                     <td>{{ e.title }}</td>
-                    <td>{{ e.startDate|date('Y-m-d')  }}</td>
-                    <td>{{ e.endDate| date('Y-m-d')  }}</td>
+                    <td>{{ e.startDate | date('Y-m-d') }}</td>
+                    <td>{{ e.endDate |date('Y-m-d')  }}</td>
                     <td>{{ e.status }}</td>
                     <td><a class='btn btn btn-outline-info' href="{{ path('employee-show-my-commits', {'projectId': e.projectId}) }}">My commits</a></td>
                     <td><a class='btn btn btn-outline-info' href="{{ path('employee-show-all-commits', {'projectId': e.projectId}) }}" >All commits</a></td>

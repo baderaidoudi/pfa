@@ -37,6 +37,12 @@ services:
 
 
 
+    EmployeeController.logger.monolog:
+             class: Pfa\ProjectBundle\Controller\EmployeeController
+             arguments: ["@logger"]
+             tags:
+                 - { name: monolog.logger}
+
 
 
     # add more services, or override services that need manual wiring

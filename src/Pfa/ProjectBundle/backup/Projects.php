@@ -2,9 +2,7 @@
 
 namespace Pfa\ProjectBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Projects
@@ -19,28 +17,28 @@ class Projects
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    private $title;
+    private $title = 'NULL';
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="start_date", type="date", nullable=true)
      */
-    private $startDate;
+    private $startDate = 'NULL';
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="end_date", type="date", nullable=true)
      */
-    private $endDate;
+    private $endDate = 'NULL';
 
     /**
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
-    private $status;
+    private $status = 'NULL';
 
     /**
      * @var integer
@@ -50,42 +48,6 @@ class Projects
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $projectId;
-
-
-
-
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @OneToMany(targetEntity="Pfa\ProjectBundle\Entity\Assignments", mappedBy="project")
-     */
-    private $assignments;
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getAssignments()
-    {
-        return $this->assignments;
-    }
-
-    /**
-     * @param ArrayCollection $assignments
-     */
-    public function setAssignments($assignments)
-    {
-        $this->assignments = $assignments;
-    }
-
-
-
-    public function __construct() {
-        $this->assignments = new ArrayCollection();
-    }
-
-
-
 
     /**
      * @return string

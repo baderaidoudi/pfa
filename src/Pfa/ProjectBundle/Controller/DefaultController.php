@@ -54,19 +54,37 @@ class DefaultController extends Controller
                 'password' => $password
             ]);
 
-/*
-            $query=$em->createQuery("SELECT uc FROM PfaProjectBundle:UserCredentials uc WHERE uc.username = :username AND uc.password = :password")
-                ->setParameter('username', $username)
-                ->setParameter('password', $password);
-             $UserCredentials=$query->getResult();
-*/
+                $session = new Session();
 
                 if($users){
+                    $session->set('userid', $users->getUserId());
+                    $session->set('empid', $users->getEmployee()->getEmployeeId());
+                    $session->set('username', $users->getUsername());
+                if($users->getRole() === 'ROLE_EMP'){
+                    $session->set('acctype', 'EMPLOYEE');
 
-                return $this->redirectToRoute(
-                    'employee-index',
-                    ['id'=> $users->getEmployee()->getEmployeeId() ]
-                );
+                    return $this->redirectToRoute(
+                        'employee-index',
+                        ['id'=> $users->getEmployee()->getEmployeeId() ]
+                    );
+
+                }
+                if ($users->getRole()=== 'ROLE_MGR'){
+                    $session->set('acctype', 'MANAGER');
+                }
+                if ($users->getRole()=== 'ROLE_ADMIN'){
+                    $session->set('acctype', 'ADMIN');
+
+/*
+                    return $this->render('@PfaProject/admin/admin-index.html.twig');
+                    */
+                    return $this->redirectToRoute(
+                        'admin-index',
+                        ['id'=> $users->getEmployee()->getEmployeeId() ]
+                    );
+
+                }
+
             }
             else{
                 return $this->redirectToRoute('loginindex');

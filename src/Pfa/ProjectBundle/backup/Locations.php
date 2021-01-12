@@ -2,9 +2,7 @@
 
 namespace Pfa\ProjectBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Locations
@@ -17,23 +15,23 @@ class Locations
     /**
      * @var string
      *
-     * @ORM\Column(name="adr", type="string")
+     * @ORM\Column(name="adr", type="string", length=255, nullable=true)
      */
-    private $adr;
+    private $adr = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postal_code", type="string")
+     * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
      */
-    private $postalCode;
+    private $postalCode = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $city;
+    private $city = 'NULL';
 
     /**
      * @var integer
@@ -43,42 +41,6 @@ class Locations
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $locationId;
-
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @OneToMany(targetEntity="Pfa\ProjectBundle\Entity\Departments", mappedBy="location")
-     */
-    private $departments;
-
-
-
-
-    public function __construct() {
-        $this->departments = new ArrayCollection();
-
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getDepartments()
-    {
-        return $this->departments;
-    }
-
-    /**
-     * @param ArrayCollection $departments
-     */
-    public function setDepartments($departments)
-    {
-        $this->departments = $departments;
-    }
-
-
-
-
 
     /**
      * @return string

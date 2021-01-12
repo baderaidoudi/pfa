@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Departments edit</title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/adminnavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <form class='form' action='{{ path('admin-employee-editetpersist', {'id': id }) }}' method = 'POST' >
+        <fieldset>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">First Name</label>
+                <input name="firstname" value="{{ employee.firstName }}"  type="text"  class="form-control col-sm-3 " placeholder="Firstname..." id="inputDefault" />
+
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Last Name</label>
+                <input name="lastname" value="{{ employee.lastName }}" type="text" class="form-control col-sm-3" placeholder="Last name..." id="inputDefault" />
+
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Job</label>
+                <input name="job" value="{{ employee.job  }}" type="text" class="form-control col-sm-3" placeholder="Ville..." id="inputDefault" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Manager ID </label>
+                {% if employee.manager is not null %}
+                <input name="managerid" value="{{ employee.manager.employeeId  }}" type="text" class="form-control col-sm-3" placeholder="Ville..." id="inputDefault" />
+                 {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Hiredate</label>
+                <input name="Hiredate" value="{{ employee.hiredate|date('Y-m-d')  }}" type="text" class="form-control col-sm-3" placeholder="Hiredate..." id="inputDefault" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Salary</label>
+                <input name="salary" value="{{ employee.salary  }}" type="text" class="form-control col-sm-3" placeholder="salary..." id="inputDefault" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Phone</label>
+                <input name="phone" value="{{ employee.phone  }}" type="text" class="form-control col-sm-3" placeholder="Phone..." id="inputDefault" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Department ID</label>
+                {% if employee.department is not null %}
+                    <input name="deptid" value="{{ employee.department.departmentId }}" type="text" class="form-control col-sm-3" placeholder="Department..." id="inputDefault" />
+                {% endif %}
+            </div>
+
+
+
+
+
+
+        </fieldset>
+
+        <br>
+
+
+        <input type='submit' class='btn btn-info btn-lg ' value = 'Update Employee' onclick="return confirm('Voulez vous modifier cette Employee')" />
+
+    </form>
+
+</div>
+
+
+
+<br><br><br><br><br>
+
+</body>
+</html>

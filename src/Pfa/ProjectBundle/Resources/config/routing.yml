@@ -16,25 +16,25 @@ info:
 
 
 team:
-    path:     /employees/employee-team{manid}
+    path:     /employees/employee-team
     defaults: { _controller: PfaProjectBundle:Employee:team }
 
 
 employee-show-my-commits:
     path:     /employees/employee-show-my-commits/{projectId}
-    defaults: { _controller: PfaProjectBundle:Employee:index }
+    defaults: { _controller: PfaProjectBundle:Employee:empshowcommit }
 
 employee-show-all-commits:
     path:     /employees/employee-show-all-commits/{projectId}
-    defaults: { _controller: PfaProjectBundle:Employee:index }
+    defaults: { _controller: PfaProjectBundle:Employee:empshowallcommit }
 
 employee-add-commit:
     path:     /employees/employee-add-commit/{projectId}
-    defaults: { _controller: PfaProjectBundle:Employee:index }
+    defaults: { _controller: PfaProjectBundle:Employee:empaddcommit }
 
 
 employee-index:
-    path:     /employees/employee-index{id}
+    path:     /employees/employee-index
     defaults: { _controller: PfaProjectBundle:Employee:index }
 
 manager-index:
@@ -50,6 +50,139 @@ mindex:
     path:     /managers/manager-index
     defaults: { _controller: PfaProjectBundle:Manager:index }
 
-employee-indexed:
+employee-info:
     path:     /employees/employee-index
-    defaults: { _controller: PfaProjectBundle:Employee:indexed }
+    defaults: { _controller: PfaProjectBundle:Employee:empinfo }
+
+credential-edit:
+    path:     /employees/credential-edit
+    defaults: { _controller: PfaProjectBundle:Employee:crendentialedit }
+
+addnewcommit:
+    path:     /employees/empaddnewcommit
+    defaults: { _controller: PfaProjectBundle:Employee:empaddnewcommit }
+
+
+credential-edit-set:
+    path:     /employees/ecredential-edit-set
+    defaults: { _controller: PfaProjectBundle:Employee:crendentialeditset }
+
+
+admin-index:
+    path:     /admin/adminindex
+    defaults: { _controller: PfaProjectBundle:Administrateur:index }
+
+
+admin-log:
+    path:     /admin/adminlogin
+    defaults: { _controller: PfaProjectBundle:Administrateur:adlog }
+
+
+admin-team:
+    path:     /admin/adminteam
+    defaults: { _controller: PfaProjectBundle:Administrateur:team }
+
+
+admin-info:
+    path:     /admin/admininfo
+    defaults: { _controller: PfaProjectBundle:Administrateur:info }
+
+
+swagger-uihtml:
+    path:     /admin/swaggeruihtml
+    defaults: { _controller: PfaProjectBundle:Administrateur:swagger }
+
+
+employees-list:
+    path:     /admin/employees-list
+    defaults: { _controller: PfaProjectBundle:Administrateur:emplist }
+
+
+departments-list:
+    path:     /admin/departments/departments-list
+    defaults: { _controller: PfaProjectBundle:Administrateur:deptlist }
+
+
+departments-edit:
+    path:     /admin/departments/departments-edit{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:deptedit }
+
+
+departments-editPersist:
+    path:     /admin/departments-edit-editPersist{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:depteditpersist }
+
+departments-delete:
+    path:     /admin/departments/departments-delete{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:deptdelete}
+
+
+departments-add:
+    path:     /admin/departments/departments-add
+    defaults: { _controller: PfaProjectBundle:Administrateur:deptadd}
+
+
+departments-addpersis:
+    path:     /admin/departments-addpersis
+    defaults: { _controller: PfaProjectBundle:Administrateur:deptaddpersist}
+
+
+
+locations-list:
+    path:     /admin/locations-list
+    defaults: { _controller: PfaProjectBundle:Administrateur:loclist }
+
+
+location-edit:
+    path:     /admin/location-edit{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:locedit }
+
+
+location-delete:
+    path:     /admin/location-delete{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:locdelete }
+
+
+location-add:
+    path:     /admin/location-add
+    defaults: { _controller: PfaProjectBundle:Administrateur:locadd }
+
+
+
+locationp-editpersist:
+    path:     /admin/location/locationedit{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:persistlocation }
+
+
+locationp-addpersist:
+    path:     /admin/location/addpersist
+    defaults: { _controller: PfaProjectBundle:Administrateur:addperlocation }
+
+admin-employee-edit:
+    path:     /admin/employee/admin-employee-edit{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:aditemp }
+
+
+
+admin-employee-editetpersist:
+    path:     /admin-employee-edit{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:editemppersist }
+
+
+
+
+
+
+
+
+admin-employee-delete:
+    path:     /admin/employee/admin-employee-delete{id}
+    defaults: { _controller: PfaProjectBundle:Administrateur:deleteemp }
+
+admin-employee-add:
+    path:     /admin/employee/admin-employee-add
+    defaults: { _controller: PfaProjectBundle:Administrateur:addemp }
+
+empeditaction-persist:
+    path:     /admin/empeditaction-persist
+    defaults: { _controller: PfaProjectBundle:Administrateur:addempaction }

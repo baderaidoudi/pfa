@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>employees-list</title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/adminnavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <!--   		<div align = 'center'><h4 th:text = "number of records : ${size}" ></h4></div> -->
+
+    <br><br>
+
+
+    {% if location is empty %}
+    <h2>No Records yet!</h2>
+    {% else %}
+
+        <div th:case="*">
+            <h2 th:text = '${size}' ></h2>  <br>
+            <table class="table table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>Adresse</th>
+                    <th>Code postal</th>
+                    <th>Ville</th>
+                    <th class='text-warning'><i>=>Edit</i></th>
+                    <th class='text-warning'>=>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for l in location %}
+                <tr>
+                    <td> {{ l.adr }}</td>
+                    <td>{{ l.postalCode }}</td>
+                    <td> {{ l.city }}</td>
+                    <td><a class='btn btn btn-outline-success' href = ' {{ path('location-edit', {'id': l.locationId}) }}'>Edit</a></td>
+                    <td><a class='btn btn btn-outline-danger' href = ' {{ path('location-delete', {'id': l.locationId}) }}' onClick="if (!(confirm('Are you sure you want to delete this location ?'))) return false" > Delete</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <h4><a href = ' {{ path('location-add') }}'>Add a new Location</a></h4>
+    </div>
+
+</div>
+{% endif %}
+<br><br><br><br><br>
+
+</body>
+</html>
+

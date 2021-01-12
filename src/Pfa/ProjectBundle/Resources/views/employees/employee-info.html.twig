@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/employeeNavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+    <div class = 'row'>
+        {% if employeeInfo is empty %}
+        <h2>No Records yet!</h2>
+        {% endif %}
+        <div class="card" style="max-width: 100rem;">
+            <div class="card-body" style="max-width: 100rem;">
+                {% for e in employeeInfo %}
+                {% for u in ucInfo %}
+                <h2 class="card-title text-warning"/> {{ e.firstName }} {{ e.lastName }}
+                <h5 class="card-subtitle mb-2 text-muted"/> Service {{ e.job }}
+                <h4 class="card-title text-primary"/> Username :  {{ u.username }}
+                <h4 class="card-title text-primary"/> isActive : {{ u.enabled }}
+                <h4 class="card-title text-primary" />email {{ e.email }}
+                <h4 class="card-title text-primary" />Department {{ e.department.departmentName }}
+                <h4 class="card-title text-primary" />phone {{ e.phone }}
+                <h4 class="card-title text-primary" />hiredate {{ e.hiredate | date}}
+
+
+                <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                <hr>
+                <a  href="{{ path('employee-index') }}" class="card-link">Show assigned projects ?</a>
+                <!--<a href="#" class="card-link">Another link</a> -->
+                <hr>
+
+
+                <a  href="{{ path('credential-edit')   }}" class='btn btn-outline-danger' >Edit credentials ?</a>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<br><br><br><br><br>
+
+<div th:replace = "layouts :: javascript"></div>
+
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>employee add commits</title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/employeeNavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <form class='jumbotron' action = ' {{ path('addnewcommit') }}' method = 'POST' >
+        <fieldset>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Username</label>
+                <input name="username" value="{{ username }} " type="text" class="form-control col-sm-3 " placeholder="Enter username..." id="username" readonly />
+
+				</div>
+				<div class="form-group">
+					<label class="col-form-label" for="inputDefault">Project title</label>
+					<input name="projectname" value="{{ a.project.title }}" type="text" class="form-control col-sm-3 " placeholder="Enter project title..." id="inputDefault" readonly />
+
+				</div>
+				<div class="form-group">
+
+					<input value="{{ a.project.projectId }}" name="projectId"  type="hidden" class="form-control col-sm-3 " placeholder="Enter project title..." id="inputDefault" readonly />
+
+				</div>
+				<div class="form-group">
+					<label for="exampleTextarea">Commit Description</label>
+					<textarea name="commitEmpDesc"  class="form-control" placeholder="Enter your new Commit Description..." id="exampleTextarea" rows="3"></textarea>
+				</div>
+			</fieldset>
+
+			<br>
+			<div switch="${msgColour}">
+				<p ase="success"><span class="badge badge-success" text="${msg}"></span></p>
+				<p case="danger"><span class="badge badge-danger" text="${msg}"></span></p>
+			</div>
+
+			<input type="submit" class='btn btn-success btn-lg ' value = 'Commit' />
+
+		</form>
+
+	</div>
+
+	<br><br><br><br><br>
+
+	<div th:replace = "layouts :: javascript"></div>
+
+</body>
+</html>

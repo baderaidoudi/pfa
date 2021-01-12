@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html >
+
+<head>
+    <meta charset="UTF-8">
+    <title>employee index</title>
+
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/adminnavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+
+<div class='container container-fluid'>
+
+
+    <p th:text="'Hello, ' + ${name} + '!'" />
+
+    <a class='btn btn-outline-success' href = ' {{ path('employees-list') }}' >Gérer employés</a> <br>
+    <a class='btn btn-outline-success' href = ' {{ path('departments-list') }}' >Gérer Départements</a> <br>
+    <a class='btn btn-outline-success' href = ' {{ path('locations-list') }}' >Gérer Location</a> <br>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

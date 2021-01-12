@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>employees-list</title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/adminnavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <!--   		<div align = 'center'><h4 th:text = "number of records : ${size}" ></h4></div> -->
+
+    <br><br>
+
+    {% if employees is empty %}
+    <h2>No Records yet!</h2>
+    {% endif %}
+            <h2 th:text = '${size}' ></h2>  <br>
+            <table class="table table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Manager</th>
+                    <th>hiredate</th>
+                    <th>Salary</th>
+                    <th>Phone</th>
+                    <th>Department </th>
+
+                    <th class='text-warning'><i>=>Edit</i></th>
+                    <th class='text-warning'>=>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for e in employees %}
+                    <tr>
+                        <td>{{ e.firstName }} {{ e.lastName }}</td>
+                        <td>{{ e.job }}</td>
+                        {% if e.manager is not null %}
+                        <td>{{ e.manager.firstName }} {{ e.manager.lastName }}</td>
+                        {% else %}
+                        <td> - </td>
+                        {% endif %}
+                        {% if e.hiredate is not null %}
+                        <td>{{ e.hiredate|date('Y-m-d') }}</td>
+                        {% else %}
+                            <td> - </td>
+                        {% endif %}
+                        <td>{{ e.salary }}</td>
+                        <td>{{ e.phone }}</td>
+                        {% if e.department is not null %}
+                        <td>{{ e.department.departmentName }}</td>
+                        {% else %}
+                            <td> - </td>
+                        {% endif %}
+                        <td><a class='btn btn btn-outline-success' href = ' {{ path('admin-employee-edit', {'id': e.employeeId }) }}'>Edit</a></td>
+                        <td><a class='btn btn btn-outline-danger' href = ' {{ path('admin-employee-delete', {'id': e.employeeId }) }}' onClick="if (!(confirm('Are you sure you want to delete this employee ?'))) return false" > Delete</a></td>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <h4><a href = '{{ path('admin-employee-add') }}'>Add a new Employee</a></h4>
+
+</div>
+
+<br><br><br><br><br>
+
+</body>
+</html>
+
+

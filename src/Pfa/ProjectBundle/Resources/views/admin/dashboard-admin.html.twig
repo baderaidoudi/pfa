@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 	<title>Welcome</title> -->
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/stylish.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+
+    <p th:text="'Hello, ' + ${name} + '!'" />
+
+    <a class='btn btn-outline-success' th:href = "@{/app/employees/employees-list}" >Get to Employees list</a> <br>
+    <a class='btn btn-outline-success' th:href = "@{/app/departments/departments-list}" >Get to Department list</a> <br>
+
+</div>
+
+<br><br><br><br><br>
+
+</body>
+</html>
+

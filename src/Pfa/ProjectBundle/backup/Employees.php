@@ -2,16 +2,12 @@
 
 namespace Pfa\ProjectBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
-use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Employees
  *
- * @ORM\Table(name="employees")
+ * @ORM\Table(name="employees", indexes={@ORM\Index(name="fk1_emp", columns={"department_id"}), @ORM\Index(name="fk2_emp", columns={"manager_id"})})
  * @ORM\Entity
  */
 class Employees
@@ -19,51 +15,51 @@ class Employees
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string")
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
-    private $firstName;
+    private $firstName = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string")
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
-    private $lastName;
+    private $lastName = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string")
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    private $email;
+    private $email = '\'springabcxyzboot@gmail.com\'';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string")
+     * @ORM\Column(name="phone", type="string", length=50, nullable=true)
      */
-    private $phone;
+    private $phone = '\'22125144\'';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="hiredate", type="date")
+     * @ORM\Column(name="hiredate", type="date", nullable=true)
      */
-    private $hiredate;
+    private $hiredate = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="string", length=255)
+     * @ORM\Column(name="job", type="string", length=255, nullable=true)
      */
-    private $job;
+    private $job = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salary", type="decimal", precision=7, scale=2)
+     * @ORM\Column(name="salary", type="decimal", precision=7, scale=2, nullable=true)
      */
-    private $salary;
+    private $salary = 'NULL';
 
     /**
      * @var integer
@@ -89,98 +85,6 @@ class Employees
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="employee_id")
      */
     private $manager;
-
-
-
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @OneToMany(targetEntity="Pfa\ProjectBundle\Entity\Employees", mappedBy="manager")
-     */
-     private $employees;
-
-
-
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @OneToMany(targetEntity="Pfa\ProjectBundle\Entity\Assignments", mappedBy="employee")
-     */
-     private $assignments;
-
-
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @OneToOne(targetEntity="Pfa\ProjectBundle\Entity\UserCredentials", mappedBy="employee")
-     */
-private $userCredential;
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getUserCredential()
-    {
-        return $this->userCredential;
-    }
-
-    /**
-     * @param ArrayCollection $userCredential
-     */
-    public function setUserCredential($userCredential)
-    {
-        $this->userCredential = $userCredential;
-    }
-
-
-
-
-    public function __construct() {
-        $this->employees = new ArrayCollection();
-        $this->assignments = new ArrayCollection();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmployees()
-    {
-        return $this->employees;
-    }
-
-    /**
-     * @param mixed $employees
-     */
-    public function setEmployees($employees)
-    {
-        $this->employees = $employees;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getAssignments()
-    {
-        return $this->assignments;
-    }
-
-    /**
-     * @param Collection $assignments
-     */
-    public function setAssignments($assignments)
-    {
-        $this->assignments = $assignments;
-    }
-
-
-
-
-
-
-
 
     /**
      * @return string

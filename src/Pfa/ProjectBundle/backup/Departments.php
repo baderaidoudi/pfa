@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Departments
  *
- * @ORM\Table(name="departments")
+ * @ORM\Table(name="departments", indexes={@ORM\Index(name="fk1_dept", columns={"location_id"})})
  * @ORM\Entity
  */
 class Departments
@@ -15,9 +15,9 @@ class Departments
     /**
      * @var string
      *
-     * @ORM\Column(name="department_name", type="string")
+     * @ORM\Column(name="department_name", type="string", length=255, nullable=true)
      */
-    private $departmentName;
+    private $departmentName = 'NULL';
 
     /**
      * @var integer
@@ -32,7 +32,9 @@ class Departments
      * @var \Pfa\ProjectBundle\Entity\Locations
      *
      * @ORM\ManyToOne(targetEntity="Pfa\ProjectBundle\Entity\Locations")
+     * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
      */
     private $location;
 

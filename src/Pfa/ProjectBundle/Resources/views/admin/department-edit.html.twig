@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Departments edit</title>
+    {% embed "@PfaProject/layout/stylish.html.twig" %}
+    {% endembed %}
+</head>
+
+<body>
+
+{% embed "@PfaProject/layout/adminnavbar.html.twig" %}
+{% endembed %}
+<br><br><br><br><br>
+
+<div class='container container-fluid'>
+
+    <form class='form' action='{{ path('departments-editPersist', {'id': id }) }}' method = 'POST' >
+        <fieldset>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Department</label>
+                <input name="departmentName" value="{{ department.departmentName }}"  type="text"  class="form-control col-sm-3 " placeholder="Adresse..." id="inputDefault" />
+
+            </div>
+
+        </fieldset>
+        <br>
+        <input type='submit' class='btn btn-info btn-lg ' value = 'Update Department' onclick="return confirm('Voulez vous modifier cette departement')" />
+
+    </form>
+
+</div>
+
+
+
+<br><br><br><br><br>
+
+</body>
+</html>

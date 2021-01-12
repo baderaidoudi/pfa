@@ -3,63 +3,33 @@
 namespace Pfa\ProjectBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Id;
 
 /**
  * Assignments
  *
- * @ORM\Table(name="assignments")
+ * @ORM\Table(name="assignments", indexes={@ORM\Index(name="fk1_assign", columns={"project_id"}), @ORM\Index(name="IDX_308A50DD8C03F15C", columns={"employee_id"})})
  * @ORM\Entity
  */
 class Assignments
 {
-
-
-
     /**
-     * @var int
-     * @Id
-     * @ORM\Column(name="assignmentsid", type="bigint")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @var string
+     *
+     * @ORM\Column(name="commit_emp_desc")
      */
-    private $assigmentsid;
-
-    /**
-     * @return int
-     */
-    public function getAssigmentsid()
-    {
-        return $this->assigmentsid;
-    }
-
-    /**
-     * @param int $assigmentsid
-     */
-    public function setAssigmentsid($assigmentsid)
-    {
-        $this->assigmentsid = $assigmentsid;
-    }
-
-
+    private $commitEmpDesc = 'NULL';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="commit_emp_desc", type="string")
+     * @ORM\Column(name="commit_mgr_desc")
      */
-    private $commitEmpDesc;
+    private $commitMgrDesc = 'NULL';
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="commit_mgr_desc", type="string")
-     */
-    private $commitMgrDesc;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="commit_date", type="datetime", unique=true, nullable=false)
+     * @ORM\Column(name="commit_date", type="timestamp",nullable=false, unique=true)
      */
     private $commitDate;
 
@@ -67,7 +37,7 @@ class Assignments
      * @var \Pfa\ProjectBundle\Entity\Projects
      *
      * @ORM\ManyToOne(targetEntity="Pfa\ProjectBundle\Entity\Projects")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id",nullable=false)
+     * @ORM\JoinColumns(name="project_id", referencedColumnName="project_id",insertable = false, updatable = false)
      */
     private $project;
 
@@ -75,7 +45,7 @@ class Assignments
      * @var \Pfa\ProjectBundle\Entity\Employees
      *
      * @ORM\ManyToOne(targetEntity="Pfa\ProjectBundle\Entity\Employees")
-     * @ORM\JoinColumn(name="employee_id", referencedColumnName="employee_id",nullable=false)
+     * @ORM\JoinColumns(name="employee_id", referencedColumnName="employee_id",insertable = false, updatable = false)
      */
     private $employee;
 
@@ -114,7 +84,7 @@ class Assignments
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getCommitDate()
     {
@@ -122,7 +92,7 @@ class Assignments
     }
 
     /**
-     * @param string $commitDate
+     * @param \DateTime $commitDate
      */
     public function setCommitDate($commitDate)
     {
@@ -160,8 +130,6 @@ class Assignments
     {
         $this->employee = $employee;
     }
-
-
 
 
 }
