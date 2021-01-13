@@ -20,11 +20,10 @@
         <div class="card" style="max-width: 100rem;">
             <div class="card-body" style="max-width: 100rem;">
                 {% for e in employeeInfo %}
-                {% for u in ucInfo %}
                 <h2 class="card-title text-warning"/> {{ e.firstName }} {{ e.lastName }}
                 <h5 class="card-subtitle mb-2 text-muted"/> Service {{ e.job }}
-                <h4 class="card-title text-primary"/> Username :  {{ u.username }}
-                <h4 class="card-title text-primary"/> isActive : {{ u.enabled }}
+                <h4 class="card-title text-primary"/> Username :  {{ e.userCredential.username }}
+                <h4 class="card-title text-primary"/> isActive : {{ e.userCredential.enabled }}
                 <h4 class="card-title text-primary" />email {{ e.email }}
                 <h4 class="card-title text-primary" />Department {{ e.department.departmentName }}
                 <h4 class="card-title text-primary" />phone {{ e.phone }}
@@ -40,7 +39,6 @@
 
                 <a  href="{{ path('credential-edit')   }}" class='btn btn-outline-danger' >Edit credentials ?</a>
                 {% endfor %}
-                {% endfor %}
             </div>
         </div>
 
@@ -50,7 +48,7 @@
 
 <br><br><br><br><br>
 
-<div th:replace = "layouts :: javascript"></div>
+
 
 </body>
 </html>

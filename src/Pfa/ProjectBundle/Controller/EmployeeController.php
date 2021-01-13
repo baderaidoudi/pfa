@@ -17,12 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 
-
-
-
 class EmployeeController extends Controller
 {
-
 
 
     /***
@@ -32,20 +28,14 @@ class EmployeeController extends Controller
     public function infoAction()
     {
         $session = new Session();
-        $empid =  $session->get('empid');
+        $empid = $session->get('empid');
         $repositoryteam = $this->getDoctrine()->getRepository(Employees::class);
-        $employeeInfo= $repositoryteam->findBy(
-            ['employeeId' => $empid ]
+        $employeeInfo = $repositoryteam->findBy(
+            ['employeeId' => $empid]
         );
 
 
-
-        $repositoryuc = $this->getDoctrine()->getRepository(UserCredentials::class);
-        $ucInfo= $repositoryuc->findBy(
-            ['employee' => $empid ]
-        );
-
-        return $this->render('@PfaProject/employees/employee-info.html.twig', ['employeeInfo' => $employeeInfo , 'ucInfo' => $ucInfo ]);
+        return $this->render('@PfaProject/employees/employee-info.html.twig', ['employeeInfo' => $employeeInfo]);
     }
 
     /***
@@ -55,36 +45,41 @@ class EmployeeController extends Controller
     public function indexAction()
     {
         $session = new Session();
-        $id=  $session->get('empid');
+        $id = $session->get('empid');
         $repositoryemp = $this->getDoctrine()->getRepository(Employees::class);
         $employeeuc = $repositoryemp->findOneBy(
-            ['employeeId' => $id ]
+            ['employeeId' => $id]
         );
 
 
-/*
+        /*
 
-        $xml="";
-        foreach($employeeuc->getEmployees() as $post) {
-            $xml .= $post->getFirstName();
+                $xml="";
+                foreach($employeeuc->getEmployees() as $post) {
+                    $xml .= $post->getFirstName();
 
-        }
+                }
 
-        throw $this->createNotFoundException(
-            'No product found for id '.$employeeuc->getUserCredential()->getUsername()
+                throw $this->createNotFoundException(
+                    'No product found for id '.$employeeuc->getUserCredential()->getUsername()
+                );
+        */
+
+
+        $session->set('manid', $employeeuc->getManager()->getEmployeeId());
+
+        $em = $this->container->get('doctrine')->getEntityManager();
+        $query = $em->createQuery(
+            "SELECT DISTINCT p.projectId , p.startDate , p.endDate , p.title as title, p.status as status FROM PfaProjectBundle:Employees e INNER JOIN PfaProjectBundle:Assignments a WITH e.employeeId = a.employee  JOIN PfaProjectBundle:Projects p WITH a.project = p.projectId WHERE a.employee = :id"
+        )
+            ->setParameter('id', $id);
+        $projects = $query->getResult();
+
+
+        return $this->render(
+            '@PfaProject/employees/employee-index.html.twig',
+            ['names' => $employeeuc->getFirstName().' '.$employeeuc->getLastName(), 'employeeProjectData' => $projects]
         );
-*/
-
-
-        $manid= $employeeuc->getManager()->getEmployeeId();
-        $session->set('manid',$employeeuc->getManager()->getEmployeeId());
-        $names = $employeeuc->getFirstName()." ".$employeeuc->getLastName();
-        $em =$this->container->get('doctrine')->getEntityManager();
-        $query=$em->createQuery("SELECT DISTINCT p.projectId , p.startDate , p.endDate , p.title as title, p.status as status FROM PfaProjectBundle:Employees e INNER JOIN PfaProjectBundle:Assignments a WITH e.employeeId = a.employee  JOIN PfaProjectBundle:Projects p WITH a.project = p.projectId WHERE a.employee = :id")
-        ->setParameter('id', $id);
-        $UserCredentials=$query->getResult();
-
-        return $this->render('@PfaProject/employees/employee-index.html.twig', ['names' => $names , 'employeeProjectData' => $UserCredentials, 'manid'=>$manid]);
     }
 
     /***
@@ -94,12 +89,20 @@ class EmployeeController extends Controller
     public function teamAction()
     {
         $session = new Session();
-        $managerid =  $session->get('manid');
+
+        $id = $session->get('empid');
+
+        $repositoryteam = $this->getDoctrine()->getRepository(Employees::class);
+        $employee = $repositoryteam->findOneBy(
+            ['employeeId' => $id]
+        );
+
         $repositoryteam = $this->getDoctrine()->getRepository(Employees::class);
         $team = $repositoryteam->findBy(
-            ['manager' => $managerid ]
+            ['manager' => $employee->getManager()]
         );
-        return $this->render('@PfaProject/employees/employee-team.html.twig',array('team' => $team));
+
+        return $this->render('@PfaProject/employees/employee-team.html.twig', array('team' => $team));
     }
 
     /***
@@ -116,54 +119,73 @@ class EmployeeController extends Controller
     public function empinfoAction()
     {
         $session = new Session();
-        $empid =  $session->get('empid');
+        $empid = $session->get('empid');
         $repositoryteam = $this->getDoctrine()->getRepository(Employees::class);
         $employee = $repositoryteam->findBy(
-            ['employeeId' => $empid ]
+            ['employeeId' => $empid]
         );
-        return $this->render('@PfaProject/employees/employee-info.html.twig', array('employee'=>$employee));
+
+        return $this->render('@PfaProject/employees/employee-info.html.twig', array('employee' => $employee));
     }
 
 
-public function empshowcommitAction($projectId){
-    $session = new Session();
-    $empid =  $session->get('empid');
-    $repositorya = $this->getDoctrine()->getRepository(Assignments::class);
-    $commit = $repositorya->findBy(
-          [ 'project' => $projectId,
-            'employee'=> $empid],
-          [ 'commitDate' => 'DESC']
+    public function empshowcommitAction($projectId)
+    {
+        $session = new Session();
+        $empid = $session->get('empid');
+        $repositorya = $this->getDoctrine()->getRepository(Assignments::class);
+        $commit = $repositorya->findBy(
+            [
+                'project' => $projectId,
+                'employee' => $empid,
+            ],
+            ['commitDate' => 'DESC']
 
-    );
+        );
 
-    return $this->render('@PfaProject/employees/employee-show-commits.html.twig', ['commit' => $commit , "project"=> $projectId]);
+        return $this->render(
+            '@PfaProject/employees/employee-show-commits.html.twig',
+            ['commit' => $commit, "project" => $projectId]
+        );
 
-}
-    public function empshowallcommitAction($projectId){
+    }
+
+    public function empshowallcommitAction($projectId)
+    {
 
         $repositorya = $this->getDoctrine()->getRepository(Assignments::class);
         $commit = $repositorya->findBy(
-            ['project' => $projectId ],
+            ['project' => $projectId],
             ['commitDate' => 'DESC']
         );
 
-        return $this->render('@PfaProject/employees/employee-show-commits.html.twig', ['commit' => $commit, "project"=> $projectId ]);
+        return $this->render(
+            '@PfaProject/employees/employee-show-commits.html.twig',
+            ['commit' => $commit, "project" => $projectId]
+        );
     }
-    public function empaddcommitAction($projectId){
+
+    public function empaddcommitAction($projectId)
+    {
 
         $session = new Session();
-        $username= $session->get('username');
+        $username = $session->get('username');
         $repositorya = $this->getDoctrine()->getRepository(Assignments::class);
         $assignments = $repositorya->findOneBy(
-            ['project' => $projectId ]
+            ['project' => $projectId]
         );
-        return $this->render('@PfaProject/employees/employee-add-commit.html.twig', array('username'=>$username , 'a'=>$assignments));
+
+        return $this->render(
+            '@PfaProject/employees/employee-add-commit.html.twig',
+            array('username' => $username, 'a' => $assignments)
+        );
 
     }
+
     public function empaddnewcommitAction(Request $request)
     {
         $session = new Session();
-        $empid =  $session->get('empid');
+        $empid = $session->get('empid');
         $repo = $this->getDoctrine()->getRepository(Assignments::class);
         $c = $repo->findOneBy(
             ['employee' => $empid]
@@ -173,35 +195,59 @@ public function empshowcommitAction($projectId){
 
             $commitEmpDesc = $request->get("commitEmpDesc");
             $entityManager = $this->getDoctrine()->getManager();
+
             $Assignments = new Assignments();
             $Assignments->setEmployee($c->getEmployee());
             $Assignments->setCommitEmpDesc($commitEmpDesc);
             $Assignments->setProject($c->getProject());
             $entityManager->persist($Assignments);
             $entityManager->flush();
+
             return $this->redirectToRoute('employee-index'); // cast $entity to string
 
         }
     }
-    public function crendentialeditAction(Request $request){
+
+    public function crendentialeditAction(Request $request)
+    {
         $session = new Session();
-        $account =  $session->get('acctype');
-        $username =  $session->get('username');
-        return $this->render('@PfaProject/employees/credential-edit.html.twig',array('account'=> $account,'username'=>$username   )) ;
+        if ($request->getMethod('POST')) {
+            $account = $session->get('acctype');
+            $username = $session->get('username');
+
+            return $this->render(
+                '@PfaProject/employees/credential-edit.html.twig',
+                array('account' => $account, 'username' => $username)
+            );
+        }
     }
 
 
-    public function crendentialeditsetAction(Request $request){
+    public function crendentialeditsetAction(Request $request)
+    {
 
         $session = new Session();
-        $userId=  $session->get('userid');
+
+
+        $empid = $session->get('empid');
+
+
+        $repo = $this->getDoctrine()->getRepository(Employees::class);
+        $employee = $repo->findOneBy(
+            ['employeeId' => $empid]
+        );
+
+
         if ($request->getMethod("POST")) {
-                $password = $request->get("password");
-                $entityManager = $this->getDoctrine()->getManager();
-                $UserCredentials = $entityManager->getRepository(UserCredentials::class)->find($userId);
-                $UserCredentials->setPassword($password);
-                $entityManager->flush();
-               return $this->redirectToRoute('employee-index');
+            $password = $request->get("password");
+            $entityManager = $this->getDoctrine()->getManager();
+            $UserCredentials = $entityManager->getRepository(UserCredentials::class)->find(
+                $employee->getUserCredential()->getUserId()
+            );
+            $UserCredentials->setPassword($password);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('employee-index');
         }
 
     }

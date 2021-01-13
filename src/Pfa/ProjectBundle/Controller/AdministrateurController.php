@@ -152,10 +152,12 @@ class AdministrateurController extends Controller
 
     public function swaggerAction()
     {
+        return $this->render('@PfaProject/admin/admin-index.html.twig');
     }
 
     public function teamAction()
     {
+        return $this->render('@PfaProject/admin/admin-index.html.twig');
     }
 
 
@@ -300,7 +302,6 @@ $employee->setHiredate(new \DateTime($hiredate));
             $city = $request->get("city");
 
 
-
             $Location = new Locations();
             $Location->setAdr($adr);
             $Location->setCity($city);
@@ -327,6 +328,52 @@ $employee->setHiredate(new \DateTime($hiredate));
 
     public function addempAction()
     {
+        return $this->render('@PfaProject/admin/employees-add.html.twig');
+    }
+
+    public function addemppersistactionAction(Request $request)
+    {
+
+        if ($request->getMethod("POST")) {
+
+            $firstname = $request->get("firstname");
+            $lastname = $request->get("lastname");
+            $job = $request->get("job");
+            $managerid = $request->get("managerid");
+            $hiredate = $request->get("Hiredate");
+            $salary = $request->get("salary");
+            $phone = $request->get("phone");
+            $deptid = $request->get("deptid");
+
+
+            $repositoryofmanager = $this->getDoctrine()->getRepository("PfaProjectBundle:Employees");
+            $manager =  $repositoryofmanager->findOneBy(["employeeId"=> $managerid ]);
+
+            $repositorofdeprtment = $this->getDoctrine()->getRepository("PfaProjectBundle:Departments");
+            $department = $repositorofdeprtment->findOneBy(["departmentId"=> $deptid ]);
+
+
+
+
+            $employee = new Employees();
+            $employee->setFirstName($firstname);
+            $employee->setLastName($lastname);
+            $employee->setJob($job);
+            $employee->setSalary($salary);
+            $employee->setPhone($phone);
+            $employee->setManager($manager);
+            $employee->setDepartment($department);
+            $employee->setHiredate(new \DateTime($hiredate));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($employee);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('employees-list');
+
+        }
+
     }
 
 }

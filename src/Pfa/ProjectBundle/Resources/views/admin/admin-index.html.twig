@@ -17,19 +17,26 @@
 <br><br><br><br><br>
 
 
+
 <div class='container container-fluid'>
 
+    <div align='center' class="jumbotron">
+        <br><br><br>
+             <h1 class="display-3">ADMINISTRATOR DASHBOARD</h1>
+        <br>
+        <hr class="my-4">
+        <br>
+        <p class="lead">
+        <table></table>
+        <a class="btn btn-dark " href="{{ path('employees-list') }}"  role="button"><strong>Gérer employés</strong></a> &nbsp;&nbsp;&nbsp;
+        <a class="btn btn-dark " href="{{ path('departments-list') }}"  role="button"><strong>Gérer Départements</strong></a>&nbsp; &nbsp;
+        <a class="btn btn-dark" href="{{ path('locations-list') }}"  role="button"><strong>Gérer Location</strong></a>&nbsp; &nbsp;
+        </p>
 
-    <p th:text="'Hello, ' + ${name} + '!'" />
+        <br><br><br>
+    </div>
 
-    <a class='btn btn-outline-success' href = ' {{ path('employees-list') }}' >Gérer employés</a> <br>
-    <a class='btn btn-outline-success' href = ' {{ path('departments-list') }}' >Gérer Départements</a> <br>
-    <a class='btn btn-outline-success' href = ' {{ path('locations-list') }}' >Gérer Location</a> <br>
 </div>
-
-
-
-
 
 
 

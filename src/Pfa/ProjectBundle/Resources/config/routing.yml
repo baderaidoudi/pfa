@@ -186,3 +186,8 @@ admin-employee-add:
 empeditaction-persist:
     path:     /admin/empeditaction-persist
     defaults: { _controller: PfaProjectBundle:Administrateur:addempaction }
+
+
+admin-employee-create-persist:
+    path:     /admin/createemp-persist
+    defaults: { _controller: PfaProjectBundle:Administrateur:addemppersistaction }
